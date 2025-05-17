@@ -22,16 +22,18 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'microsoft'
-
-      - name: Build with Maven
+          distribution: 'microsoft'      - name: Build with Maven
         run: mvn clean install
+
+      - name: List target directory
+        run: ls -la ${{ github.workspace }}/target/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: dxservice
           path: '${{ github.workspace }}/target/*.jar'
+          if-no-files-found: error # ファイルが見つからない場合はエラー
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,12 +42,13 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
       
-    steps:
-      - name: Download artifact from build job
+    steps:      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: dxservice
-      
+          
+      - name: Display downloaded files
+        run: ls -la
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
