@@ -23,6 +23,13 @@ jobs:
         distribution: 'microsoft'
     - name: Build with Maven
       run: mvn clean package --file pom.xml
+
+    - name: List target directory
+      run: ls -la target/
+    
+    - name: List WAR files
+      run: find target -name "*.war"
+
       #run: mvn -B package --file pom.xml
       # working-directory: my-app-path
     - name: Azure WebApp
@@ -30,7 +37,8 @@ jobs:
       with:
           app-name: 'dxservice-appservice-java17-m-hazama'
           slot-name: 'Production'
-          package: '*.war'
+          package: 'target/dxservice-0.0.1-SNAPSHOT.war'
+          # package: '*.war'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6CAAF15D9924947B633DAEF776CD609 }}
 
   # jobs:
