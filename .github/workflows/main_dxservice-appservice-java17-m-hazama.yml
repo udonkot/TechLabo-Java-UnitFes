@@ -22,7 +22,8 @@ jobs:
         java-version: '17'
         distribution: 'microsoft'
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn clean package --file pom.xml
+      #run: mvn -B package --file pom.xml
       # working-directory: my-app-path
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v3
