@@ -27,10 +27,10 @@ jobs:
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v3
       with:
-        app-name: TechLabo-Java-UnitFes
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        # publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6CAAF15D9924947B633DAEF776CD609 }}
-        package: /target/*.war
+          app-name: 'dxservice-appservice-java17-m-hazama'
+          slot-name: 'Production'
+          package: '*.war'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6CAAF15D9924947B633DAEF776CD609 }}
 
   # jobs:
   # build:
