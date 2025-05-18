@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>404エラー</title>
+</head>
+
+<body>
+    <h1>このページははずれ</h1>
+    <p th:text="${status} + ' ' + ${error}"></p>
+    <!-- <p th:text="${message}"></p>
+    <p th:if="${exception != null}">
+        <strong>例外:</strong> <span th:text="${exception}"></span>
+    </p> -->
+    <a th:href="@{/}">トップページへ戻る</a>
+</body>
+
+</html>
