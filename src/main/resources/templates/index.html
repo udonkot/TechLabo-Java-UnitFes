@@ -3,13 +3,179 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ホーム</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-hover: #45a049;
+            --text-color: #333;
+            --border-color: #ddd;
+            --background-light: #f9f9f9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            word-wrap: break-word;
+        }
+
+        .form-container {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--background-light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            /* 適切なフォントサイズでモバイルでの誤タップを防止 */
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            max-width: 200px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .links {
+            margin-top: 30px;
+        }
+
+        .links a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .links a:hover {
+            background-color: #0b7dda;
+        }
+
+        /* レスポンシブデザイン用メディアクエリ */
+        @media screen and (min-width: 768px) {
+            .form-group {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            label {
+                margin-right: 15px;
+                margin-bottom: 0;
+                width: 40%;
+            }
+
+            input[type="text"] {
+                width: 60%;
+            }
+
+            button {
+                width: auto;
+                margin-left: auto;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-container {
+                padding: 10px;
+            }
+
+            button {
+                padding: 10px 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <h1>2025/05 ユニットフェス by DXサービスユニット</h1>
-    <!-- 相対パスまたはth:hrefを使用 -->
-    <p><a th:href="@{/hello}">概要</a></p>
+
+    <div class="form-container">
+        <h3>キーワード入力画面</h3>
+        <div class="form-group">
+            <label for="pathParam">クイズの解答からキーワードを推測して「送信する」ボタンを押してください</label>
+            <input type="text" id="pathParam" placeholder="キーワードを入力してください">
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <button onclick="navigateWithParam()">送信する</button>
+        </div>
+    </div>
+
+    <div class="links">
+        <!-- 相対パスまたはth:hrefを使用 -->
+        <p><a th:href="@{/hello}">概要</a></p>
+    </div>
+
+    <script>
+        function navigateWithParam() {
+            const paramValue = document.getElementById('pathParam').value.trim();
+            if (paramValue) {
+                // 入力値をURLエンコードして安全にする
+                const encodedValue = encodeURIComponent(paramValue);
+                // /path/{paramValue} の形式で遷移する
+                window.location.href = `/unitfes/${encodedValue}`;
+            } else {
+                alert('パラメータを入力してください');
+            }
+        }
+    </script>
 </body>
 
 </html>
