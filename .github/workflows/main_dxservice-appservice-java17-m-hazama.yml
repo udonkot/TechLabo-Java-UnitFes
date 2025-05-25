@@ -50,4 +50,4 @@ jobs:
           app-name: 'dxservice-appservice-java17-m-hazama'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6CAAF15D9924947B633DAEF776CD609 }}
-          package: '*.war'
+          package: '/*.zip'
