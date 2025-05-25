@@ -43,6 +43,10 @@ jobs:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
 
+      # ダウンロードしたファイルの確認
+      - name: List downloaded files
+        run: ls -la '${{ github.workspace }}/target/'
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
