@@ -42,9 +42,9 @@ jobs:
         with:
           name: java-app
 
-      # ダウンロードしたファイルの確認
-      - name: List downloaded files
-        run: ls -la '${{ github.workspace }}/target/'
+      # # ダウンロードしたファイルの確認
+      # - name: List downloaded files
+      #   run: ls -la '${{ github.workspace }}/target/'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
