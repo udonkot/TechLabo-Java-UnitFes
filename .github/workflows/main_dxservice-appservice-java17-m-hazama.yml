@@ -28,21 +28,20 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: java-app
-        path: '${{ github.workspace }}/target/*.jar'
+        path: '${{ github.workspace }}/target/*.war'
 
   deploy:
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/target/*.war'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -51,4 +50,4 @@ jobs:
           app-name: 'dxservice-appservice-java17-m-hazama'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6CAAF15D9924947B633DAEF776CD609 }}
-          package: '*.jar'
+          package: '*.war'
