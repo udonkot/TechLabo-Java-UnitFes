@@ -20,4 +20,8 @@ public class DxserviceController {
         return "hello";
     }
 
+    @GetMapping("/keyword")
+    public String keyword(Model model) {
+        return "keyword";
+    }
 }
