@@ -41,10 +41,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
+          path: release
 
-      # # ダウンロードしたファイルの確認
-      # - name: List downloaded files
-      #   run: ls -la '${{ github.workspace }}/target/'
+      # ダウンロードしたファイルの確認 (デバッグ用)
+      - name: List downloaded files
+        run: ls -la release
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -53,4 +54,4 @@ jobs:
           app-name: 'dxservice-appservice-java17-m-hazama'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6CAAF15D9924947B633DAEF776CD609 }}
-          package: '/*.war'
+          package: release/*.war
