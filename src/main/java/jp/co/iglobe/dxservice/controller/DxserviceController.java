@@ -20,8 +20,13 @@ public class DxserviceController {
         return "hello";
     }
 
-    @GetMapping("/keyword")
+    @GetMapping("/iglobe")
+    public String iglobe(Model model) {
+        return "iglobe";
+    }
+
+    @GetMapping("/20250532")
     public String keyword(Model model) {
-        return "keyword";
+        return "20250532";
     }
 }
