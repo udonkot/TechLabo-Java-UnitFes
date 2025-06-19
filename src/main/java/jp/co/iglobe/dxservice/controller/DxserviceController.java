@@ -29,4 +29,11 @@ public class DxserviceController {
     public String keyword(Model model) {
         return "20250532";
     }
+
+    @GetMapping("/unitfes/mokumoku")
+    public String mokumoku(Model model) {
+        model.addAttribute("title", "もくもく会");
+        model.addAttribute("description", "DXサービスユニットのもくもく会は、毎週水曜日に開催されています。自分の好きな技術をもくもくと学習する場です。");
+        return "mokumoku";
+    }
 }
